@@ -1,7 +1,6 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Anthony
- * Date: 08-03-16
- * Time: 11:51
- */
+
+<ul>
+    <?php foreach($data['authors'] as $author): ?>
+    <li><a href="<?php echo $_SERVER['PHP_SELF']?>?a=show&e=authors&id=<?php echo $author->id; ?>"><?php echo $author->name;?></a></li>
+<?php endforeach; ?>
+</ul>
