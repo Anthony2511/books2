@@ -22,7 +22,7 @@ function show(){
         return ['author' => $author, 'view' => $view];
     } else {
         // rediriger vers une page d'erreur
-        die('il manque l identifiant de votre auteur');
+        die('il manque l identifiant de l auteur');
     }
 
 }
