@@ -6,14 +6,14 @@
  * Time: 11:48
  */
 function index(){
-    include ('editors.php');
+    include ('Editors.php');
     $editors = getEditors();
     $view = $GLOBALS['a'].'_'.$GLOBALS['e'].'.php';
 
     return ['editors' => $editors, 'view' => $view];
 }
 function show(){
-    include ('editors.php');
+    include ('Editors.php');
     if (isset($_GET['id'])) {
         $id = intval($_GET['id']);
         $editor = getEditor($id);

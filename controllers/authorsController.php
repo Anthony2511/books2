@@ -6,14 +6,14 @@
  * Time: 11:48
  */
 function index(){
-    include ('authors.php');
+    include ('Authors.php');
     $authors = getAuthors();
     $view = $GLOBALS['a'].'_'.$GLOBALS['e'].'.php';
 
     return ['authors' => $authors, 'view' => $view];
 }
 function show(){
-    include ('authors.php');
+    include ('Authors.php');
     if (isset($_GET['id'])) {
         $id = intval($_GET['id']);
         $author = getAuthor($id);

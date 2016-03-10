@@ -9,8 +9,11 @@
 $viewsDir = __DIR__ . '/views';
 $modelsDir = __DIR__ . '/models';
 $controllerDir = __DIR__ . '/controllers';
-set_include_path($viewsDir . PATH_SEPARATOR . $modelsDir.PATH_SEPARATOR.$controllerDir . PATH_SEPARATOR . get_include_path());
+set_include_path($viewsDir . PATH_SEPARATOR . $modelsDir . PATH_SEPARATOR . $controllerDir . PATH_SEPARATOR . get_include_path());
 
+spl_autoload_register(function ($class) {
+    include($class . '.php');
+});
 $dbConfig = parse_ini_file('db.ini');
 $pdoOptions = [
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
@@ -26,17 +29,18 @@ try {
     // redirection pour afficher une erreur relative à la connexion
     die($exception->getMessage());
 }
-include ('routes.php');
+include('routes.php');
 $defaultRoute = $routes['default'];
-$routeParts = explode('_',$defaultRoute);
+$routeParts = explode('_', $defaultRoute);
 
-$a = isset($_REQUEST['a'])?$_REQUEST['a']:$routeParts[0];
-$e =  isset($_REQUEST['e'])?$_REQUEST['e']:$routeParts[1];
-if(!in_array($a.'_'.$e,$routes)){
+$a = isset($_REQUEST['a']) ? $_REQUEST['a'] : $routeParts[0];
+$e = isset($_REQUEST['e']) ? $_REQUEST['e'] : $routeParts[1];
+if (!in_array($a . '_' . $e, $routes)) {
     //redirection 404
     die('ce que vous chercher n est pas ici');
 }
 
-include ($e.'controller.php');
+$controller_name = ucfirst($e) . 'controller';
+die($controller_name);
 $data = call_user_func($a); //
 include('view.php');
