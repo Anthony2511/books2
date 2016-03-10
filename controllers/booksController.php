@@ -8,10 +8,15 @@
  */
 class BooksController
 {
+    private $books_model = null;
+    public function __construct()
+    {
+        $this->books_model = new  Books();
+    }
+
     public function index()
     {
-        include('Books.php');
-        $books = getBooks();
+        $books = $this->books_model->getBooks();
         $view = $GLOBALS['a'] . '_' . $GLOBALS['e'] . '.php';
 
         return ['books' => $books, 'view' => $view];
@@ -19,10 +24,9 @@ class BooksController
 
     public function show()
     {
-        include('Books.php');
         if (isset($_GET['id'])) {
             $id = intval($_GET['id']);
-            $book = getBook($id);
+            $book = $this->books_model->getBook($id);
             $view = $GLOBALS['a'] . '_' . $GLOBALS['e'] . '.php';
 
             return ['book' => $book, 'view' => $view];

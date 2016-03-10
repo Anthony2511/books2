@@ -41,6 +41,7 @@ if (!in_array($a . '_' . $e, $routes)) {
 }
 
 $controller_name = ucfirst($e) . 'controller';
-die($controller_name);
-$data = call_user_func($a); //
+$controller = new $controller_name();
+
+$data = call_user_func([$controller, $a]);
 include('view.php');
