@@ -16,19 +16,20 @@ class EditorsController
     }
     function index()
     {
-        $editors = $this->editors_model->getEditors();
-        $view = $GLOBALS['a'] . '_' . $GLOBALS['e'] . '.php';
-        return ['editors' => $editors, 'view' => $view];
+        $editors = $this->editors_model->all();
+        $view = 'index_editors.php';
+        $page_title = "La liste des éditeurs";
+        return ['editors' => $editors, 'view' => $view, 'page_title'=> $page_title];
     }
 
     function show()
     {
         if (isset($_GET['id'])) {
             $id = intval($_GET['id']);
-            $editor = $this->editors_model->getEditor($id);
-            $view = $GLOBALS['a'] . '_' . $GLOBALS['e'] . '.php';
-
-            return ['editor' => $editor, 'view' => $view];
+            $editor = $this->editors_model->find($id);
+            $page_title = 'La fiche de l éditeur'. $editor->name;
+            $view = 'show_editors.php';
+            return ['editor' => $editor, 'view' => $view, 'page_title'=> $page_title];
         } else {
             // rediriger vers une page d'erreur
             die('il manque l identifiant de l éditeur');

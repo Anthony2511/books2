@@ -18,10 +18,10 @@ class AuthorsController
     function index()
     {
 
-        $authors = $this->authors_model->getAuthors();
-        $view = $GLOBALS['a'] . '_' . $GLOBALS['e'] . '.php';
-
-        return ['authors' => $authors, 'view' => $view];
+        $authors = $this->authors_model->all();
+        $view = 'index_authors.php';
+        $page_title = 'La liste des auteurs';
+        return ['authors' => $authors, 'view' => $view, 'page_title' => $page_title];
     }
 
     function show()
@@ -29,10 +29,10 @@ class AuthorsController
 
         if (isset($_GET['id'])) {
             $id = intval($_GET['id']);
-            $author = $this->authors_model->getAuthor($id);
-            $view = $GLOBALS['a'] . '_' . $GLOBALS['e'] . '.php';
-
-            return ['author' => $author, 'view' => $view];
+            $author = $this->authors_model->find($id);
+            $view = 'show_authors.php';
+            $page_title = 'La fiche de l auteur' . $author->name;
+            return ['author' => $author, 'view' => $view, 'page_title' => $page_title];
         } else {
             // rediriger vers une page d'erreur
             die('il manque l identifiant de l auteur');
