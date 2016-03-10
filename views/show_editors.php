@@ -1,7 +1,7 @@
 <h1> <?php echo $data['editor']->name; ?></h1>
-<?php if($data['editor']->url): ?>
+<?php if($data['editor']->logo): ?>
     <div class="logo">
-        <img src="<?php echo $data['editor']->url; ?>" alt= "">
+        <img src="<?php echo $data['editor']->logo; ?>" alt= "">
     </div>
 <?php endif; ?>
 
